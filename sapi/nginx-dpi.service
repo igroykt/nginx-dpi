@@ -1,0 +1,23 @@
+[Unit]
+Description=The NGINX-DPI reverse proxy server
+After=syslog.target network-online.target remote-fs.target nss-lookup.target
+Wants=network-online.target
+
+[Service]
+Type=forking
+PIDFile=/usr/local/nginx-dpi/nginx/logs/nginx.pid
+LimitNOFILE=200000
+
+ExecStartPre=/usr/local/nginx-dpi/bin/openresty -t
+ExecStart=/usr/local/nginx-dpi/bin/openresty -c /usr/local/nginx-dpi/cfg/nginx.conf
+ExecStartPost=/usr/local/nginx-dpi/cfg/start.sh
+
+ExecReload=/usr/local/nginx-dpi/bin/openresty -s reload
+
+ExecStop=/bin/kill -s QUIT $MAINPID
+ExecStopPost=/usr/local/nginx-dpi/cfg/stop.sh
+
+PrivateTmp=true
+
+[Install]
+WantedBy=multi-user.target
