@@ -18,6 +18,7 @@ yes|cp -r nginx-dpi/lua-resty-openssl/lib/resty/* /usr/local/nginx-dpi/lualib/re
 yes|cp -r nginx-dpi/lua-resty-openssl-aux-module/lualib/* /usr/local/nginx-dpi/lualib/
 yes|cp nginx-dpi/lua-resty-socks5/socks5.lua /usr/local/nginx-dpi/lualib/resty/
 yes|cp nginx-dpi/lua-struct/src/struct.lua /usr/local/nginx-dpi/lualib/
+cp -r nginx-dpi/cfg /usr/local/nginx-dpi/
 cp nginx-dpi/sapi/nginx-dpi.service /etc/systemd/system/
 systemctl daemon-reload
 ```

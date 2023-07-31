@@ -11,7 +11,7 @@ iptables -F -t nat
 sysctl -w net.ipv4.ip_forward=1 > /dev/null
 
 # nat
-EXTERNAL_IP=`ip a s eth0 | egrep -o 'inet [0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | cut -d' ' -f2`
+EXTERNAL_IP=$(ip a s $INTERFACE | egrep -o 'inet [0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | cut -d' ' -f2)
 iptables -t nat -A POSTROUTING -o $INTERFACE -j SNAT --to $EXTERNAL_IP
 
 # connection tracker setup
