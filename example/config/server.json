@@ -1,0 +1,26 @@
+{
+	"listen": "<address>:<port>",
+	"bandwidth": {
+		"up": "80 Mbps",
+		"down": "80 Mbps"
+	},
+	"disableUDP": false,
+	"obfs": {
+		"type": "salamander",
+		"salamander": {
+			"password": "changeme"
+		}
+	},
+	"auth": {
+		"type": "password",
+		"password": "changeme"
+	},
+	"outbounds": {
+		"name": "server",
+		"type": "direct",
+		"direct": {
+			"mode": 4,
+			"bindIPv4": "<address>"
+		}
+	}
+}

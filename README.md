@@ -5,12 +5,14 @@ Original post: [https://habr.com/ru/post/548110](https://habr.com/ru/post/548110
 
 ## Install
 ```
-git clone https://gitflic.ru/project/igroykt/nginx-dpi.git
+git clone https://github.com/igroykt/nginx-dpi.git
 dnf install libtool make zlib-devel openssl-devel pcre-devel bc
-wget https://openresty.org/download/openresty-1.19.9.1.tar.gz
-tar xvvf openresty-1.19.9.1.tar.gz
-cd openresty-1.19.9.1
-./configure --prefix=/usr/local/nginx-dpi --with-cc=gcc --add-module=../nginx-dpi/lua-resty-openssl-aux-module --add-module=../nginx-dpi/lua-resty-openssl-aux-module/stream --add-module=../nginx-dpi/lua-resty-getorigdest-module/src
+wget https://openresty.org/download/openresty-1.25.3.1.tar.gz
+tar xvvf openresty-1.25.3.1.tar.gz
+wget https://www.openssl.org/source/openssl-1.1.1t.tar.gz
+tar xvvf openssl-1.1.1t.tar.gz
+cd openresty-1.25.3.1
+./configure --prefix=/usr/local/nginx-dpi --with-cc=gcc --add-module=../nginx-dpi/lua-resty-openssl-aux-module --add-module=../nginx-dpi/lua-resty-openssl-aux-module/stream --add-module=../nginx-dpi/lua-resty-getorigdest-module/src --with-openssl=../openssl-1.1.1t --with-http_v3_module
 gmake && gmake install
 cd ..
 yes|cp -r nginx-dpi/lua-resty-getorigdest-module/lualib/* /usr/local/nginx-dpi/lualib/
@@ -24,7 +26,7 @@ systemctl daemon-reload
 ```
 
 ## DPI setup
-Configuration file located at /usr/local/nginx-dpi/cfg/nginx.conf. It is necessary to correct the variables in the section 'config'.
+Configuration file located at /usr/local/nginx-dpi/cfg/config.lua. It is necessary to correct the variables.
 ```
 local proxy_addr - proxy server IP address
 local proxy_port - proxy server port
@@ -55,5 +57,21 @@ NETWORK - local network
     endscript
 }
 ```
+
+## Замедление Youtube в России
+Добавьте следующие домены в force_domains:
+```
+"youtube.com",
+"googlevideo.com",
+"ytimg.com",
+"googleapis.com",
+"youtube-nocookie.com",
+"gvt1.com",
+"gvt2.com",
+"googleusercontent.com",
+"ggpht.com",
+"gstatic.com"
+```
+Чтобы ролики игрались в 4K включите в браузере поддержку протокола QUIC (в Яндекс.Браузер включен по-умолчению).
 
 More detailed information at: [https://it.igro.tech/nginx-dpi](https://it.igro.tech/nginx-dpi)

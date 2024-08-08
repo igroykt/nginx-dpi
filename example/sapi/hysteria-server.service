@@ -1,0 +1,12 @@
+[Unit]
+Description=Hysteria Server Service for %I
+Documentation=man:ss-server(1)
+After=network-online.target
+
+[Service]
+Type=simple
+LimitNOFILE=32768
+ExecStart=nice -n 15 /usr/local/hysteria/hysteria-linux-amd64 server -c /usr/local/hysteria/server.json
+
+[Install]
+WantedBy=multi-user.target

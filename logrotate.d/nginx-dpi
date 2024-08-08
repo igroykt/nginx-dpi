@@ -1,0 +1,11 @@
+/usr/local/nginx-dpi/nginx/logs/*.log {
+    daily
+    rotate 10
+    missingok
+    notifempty
+    compress
+    sharedscripts
+    postrotate
+        [ ! -f /usr/local/nginx-dpi/nginx/logs/nginx.pid ] || kill -USR1 `cat /usr/local/nginx-dpi/nginx/logs/nginx.pid`
+    endscript
+}

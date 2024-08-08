@@ -1,0 +1,21 @@
+{
+	"server": "<address>:<port>",
+	"tls": {
+		"insecure": true
+	},
+	"bandwidth": {
+		"up": "80 Mbps",
+		"down": "80 Mbps"
+	},
+	"socks5": {
+		"listen": "127.0.0.1:1082",
+		"disableUDP": false
+	},
+	"obfs": {
+		"type": "salamander",
+		"salamander": {
+			"password": "changeme"
+		}
+	},
+	"auth": "changeme"
+}

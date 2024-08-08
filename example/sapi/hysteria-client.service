@@ -1,0 +1,14 @@
+[Unit]
+Description=Hysteria client
+After=network-online.target
+StartLimitIntervalSec=0
+
+[Service]
+Type=simple
+LimitNOFILE=32768
+Restart=always
+RestartSec=5
+ExecStart=/usr/local/hysteria/hysteria-linux-amd64 client -c /usr/local/hysteria/client.json
+
+[Install]
+WantedBy=multi-user.target
