@@ -6,7 +6,7 @@ Original post: [https://habr.com/ru/post/548110](https://habr.com/ru/post/548110
 ## Install
 ```
 git clone https://github.com/igroykt/nginx-dpi.git
-dnf install libtool make zlib-devel openssl-devel pcre-devel bc
+dnf install libtool make zlib-devel pcre-devel bc
 wget https://openresty.org/download/openresty-1.25.3.1.tar.gz
 tar xvvf openresty-1.25.3.1.tar.gz
 wget https://www.openssl.org/source/openssl-1.1.1t.tar.gz
