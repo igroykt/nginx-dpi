@@ -14,5 +14,6 @@ return {
 	},
 	connection_timeout = 2000,
 	read_timeout = 2000,
-	write_timeout = 2000
+	write_timeout = 2000,
+	accel_youtube = true
 }
