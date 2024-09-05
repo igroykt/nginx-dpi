@@ -1,0 +1,54 @@
+#!/bin/sh
+
+# PROVIDE: nginxdpi
+# REQUIRE: NETWORKING
+# BEFORE: DAEMON
+# KEYWORD: shutdown
+
+# Configuration options
+nginxdpi_enable=${nginxdpi_enable:-"YES"}
+nginxdpi_user=${nginxdpi_user:-"root"}
+nginxdpi_group=${nginxdpi_group:-"wheel"}
+nginxdpi_pidfile="/usr/local/nginx-dpi/nginx/logs/nginx.pid"
+nginxdpi_command="/usr/local/nginx-dpi/bin/openresty"
+nginxdpi_config="/usr/local/nginx-dpi/cfg/nginx.conf"
+
+. /etc/rc.subr
+
+name="nginxdpi"
+rcvar=nginxdpi_enable
+pidfile=${nginxdpi_pidfile}
+
+start_precmd="nginxdpi_prestart"
+start_cmd="nginxdpi_start"
+reload_cmd="nginxdpi_reload"
+stop_cmd="nginxdpi_stop"
+
+nginxdpi_prestart() {
+    # Validate the configuration file
+    ${nginxdpi_command} -t || return 1
+}
+
+nginxdpi_start() {
+    # Start the service
+    ${nginxdpi_command} -c ${nginxdpi_config} || return 1
+
+    # Add custom start actions if needed (from start.sh)
+    # Custom start actions go here (translated from start.sh)
+}
+
+nginxdpi_reload() {
+    # Reload the configuration
+    ${nginxdpi_command} -s reload || return 1
+}
+
+nginxdpi_stop() {
+    # Stop the service gracefully
+    ${nginxdpi_command} -s stop || return 1
+
+    # Add custom stop actions if needed (from stop.sh)
+    # Custom stop actions go here (translated from stop.sh)
+}
+
+load_rc_config $name
+run_rc_command "$1"
