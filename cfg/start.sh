@@ -9,6 +9,8 @@ iptables -F -t nat
 
 # forward
 sysctl -w net.ipv4.ip_forward=1 > /dev/null
+sysctl -w net.ipv4.tcp_fin_timeout=20 > /dev/null
+sysctl -w net.ipv4.tcp_tw_reuse=2 > /dev/null
 
 # nat
 EXTERNAL_IP=$(ip a s $INTERFACE | egrep -o 'inet [0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}' | cut -d' ' -f2)
